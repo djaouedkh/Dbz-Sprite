@@ -1,29 +1,29 @@
-// Canvas et son context 2d
+// Canvas and context 2d
 var canvas = document.querySelector('#canvas');
 var ctx = canvas.getContext("2d");
 
-// Largeur, hauteur du canvas
+// widht and height canvas
 canvas.width = 800;
 canvas.height = 300; 
 
-// Charge les images , nettoie le canvas, et dessine l'image de base de trunks
+// Loads the images, cleans up the canvas, and draws the base image of trunks
 document.addEventListener('DOMContentLoaded', function () {
     var imgTrunks = document.querySelector('#imgTrunks');
     ctx.clearRect(x, y, canvas.width, canvas.height);
     ctx.drawImage(imgTrunks,0,0,trunksWidthEpee,trunksHeightEpee,x,y,trunksWidthEpee,trunksHeightEpee);
 });
 
-// Largeur hauteur du bloc
+// Width height of the block
 var trunksWidthEpee = 190; 
 var trunksHeightEpee = 174; 
 
-// A quel bloc commence l animation
+// Starting block
 var curFrame = 0; 
 
-// Nombre de bloc
+// Number of blocks
 var frameCount = 6; 
 
-// Position du sprite dans le canvas
+// Position of the sprite in the canvas
 var x=0;
 var y=0; 
 
@@ -32,16 +32,16 @@ var flag;
 var animation;
 var button = document.querySelector('#button');
 
-// Lance animation et bloque le bouton qui l'a crée
+// Starts animation and blocks the button
 button.addEventListener('click', function(){   
     flag=0;
     animation = setInterval(drawTrunks,170);
     button.disabled = true;
 })
 
-// Supprime l'image pour que drawImage() puisse dessiner la suivante et translate de bloc en bloc 6 fois
-// Reviens a l'image de base, stop l'animation et débloque le boutton
-// CurFrame =1 , 2,3,4,5,6,0... car 6 modulo de 6 = 1 donc cela crée une boucle.
+// Delete the image so that drawImage() can draw the next one and translate from block to block 6 times
+// Go back to the base image, stop the animation and unlock the button
+// CurFrame =1 , 2,3,4,5,6,0... because 6 modulo 6 = 1 so this creates a loop.
 function updateFrame(){
     if (flag < 6) {
         curFrame = ++curFrame % frameCount; 
@@ -56,8 +56,8 @@ function updateFrame(){
     }
 }
 
-// Appel de la Translation et creation du sprite
-// drawImage(Image, Sx position x dans toute l'image, Sy position y dans toute l'image, sLargeur, sHauteur, dX position x où l'image doit etre dans le canvas, dY position y où l'image doit etre dans le canvas , dLargeur de l'image dessinee, dHauteur de l'image dessinée)
+// Calling the Translation and creating the sprite
+// drawImage(Image, Sx position x in all image, Sy position y in all image, sWidth, sHeight, dX position x where image is in canvas, dY position y where image is in canvas , dWidth image drawing, dHeight image drawing)
 function drawTrunks(){
     updateFrame();
     ctx.drawImage(imgTrunks,srcX,0,trunksWidthEpee,trunksHeightEpee,x,y,trunksWidthEpee,trunksHeightEpee);
